@@ -1,0 +1,883 @@
+{
+  "businesses": [
+    {
+      "id": "biz-daily-grind-01",
+      "name": "The Daily Grind Café",
+      "category": "Café & Specialty Coffee",
+      "location": "Bandra West, Mumbai",
+      "default_language": "English",
+      "created_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "user-owner-01",
+      "business_id": "biz-daily-grind-01",
+      "full_name": "Vikram Mehta (Owner)",
+      "email": "vikram@dailygrindcafe.in",
+      "phone": "+91 98200 11223",
+      "role": "OWNER",
+      "preferred_language": "English",
+      "active": true,
+      "created_at": "2026-09-26T08:54:10.246Z"
+    },
+    {
+      "id": "user-emp-rahul-01",
+      "business_id": "biz-daily-grind-01",
+      "full_name": "Rahul Sharma",
+      "email": "rahul@dailygrindcafe.in",
+      "phone": "+91 98111 22334",
+      "role": "EMPLOYEE",
+      "preferred_language": "English",
+      "active": true,
+      "created_at": "2026-09-26T08:54:10.246Z"
+    },
+    {
+      "id": "user-emp-priya-02",
+      "business_id": "biz-daily-grind-01",
+      "full_name": "Priya Patil",
+      "email": "priya@dailygrindcafe.in",
+      "phone": "+91 98333 44556",
+      "role": "EMPLOYEE",
+      "preferred_language": "Marathi",
+      "active": true,
+      "created_at": "2026-09-26T08:54:10.246Z"
+    },
+    {
+      "id": "user-emp-amit-03",
+      "business_id": "biz-daily-grind-01",
+      "full_name": "Amit Kumar",
+      "email": "amit@dailygrindcafe.in",
+      "phone": "+91 98444 55667",
+      "role": "EMPLOYEE",
+      "preferred_language": "Hindi",
+      "active": true,
+      "created_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "training_modules": [
+    {
+      "id": "train-cappuccino-01",
+      "business_id": "biz-daily-grind-01",
+      "title": "Cappuccino Preparation",
+      "description": "Complete operational guide for grinding, extracting espresso, steaming milk, and serving standard café cappuccinos.",
+      "department": "Operations",
+      "target_role": "Barista & Frontline Staff",
+      "source_language": "English",
+      "status": "published",
+      "current_version": 1,
+      "created_by": "user-owner-01",
+      "created_at": "2026-09-26T08:54:10.246Z",
+      "updated_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "training_versions": [
+    {
+      "id": "ver-cappuccino-v1",
+      "training_module_id": "train-cappuccino-01",
+      "version_number": 1,
+      "sop_json": {
+        "title": "Cappuccino Preparation",
+        "summary": "Standard operating procedure for preparing and serving a consistent, high-quality artisanal cappuccino for café guests.",
+        "language": "English",
+        "estimated_duration": 8,
+        "prerequisites": [
+          "Completed basic café safety and hygiene induction",
+          "Espresso machine warmed up to operating pressure (9 bar)",
+          "Fresh whole milk refrigerated at 4°C"
+        ],
+        "materials": [
+          "Commercial espresso grinder",
+          "18g fresh specialty coffee beans",
+          "Commercial espresso machine & portafilter",
+          "Calibrated 58mm coffee tamper",
+          "Stainless steel milk frothing pitcher (350ml)",
+          "150ml cold whole milk",
+          "Digital milk thermometer",
+          "Clean microfiber cloth for steam wand"
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "title": "Hygiene & Machine Preparation",
+            "instructions": "Thoroughly wash and sanitize hands with warm water and soap for 20 seconds. Inspect the espresso group head and run a 2-second blank water flush to clear residual coffee oils.",
+            "expected_outcome": "Hands are sanitized and group head is clean and pre-warmed for brewing.",
+            "materials": [
+              "Sanitizing soap",
+              "Warm water"
+            ],
+            "warnings": [
+              "Group head and shower screen are extremely hot (93°C). Do not touch directly with bare hands."
+            ],
+            "common_mistakes": [
+              "Skipping the blank water flush, which causes stale coffee taste."
+            ],
+            "source_reference": "Step 1 of owner operational manual"
+          },
+          {
+            "step_number": 2,
+            "title": "Dosing and Grinding Coffee Beans",
+            "instructions": "Remove the portafilter, wipe the basket dry with a clean cloth. Grind exactly 18.0 grams of fresh coffee beans directly into the portafilter basket.",
+            "expected_outcome": "Dry basket filled with 18g clump-free espresso coffee grounds.",
+            "materials": [
+              "Specialty coffee beans",
+              "Digital precision scale"
+            ],
+            "warnings": [
+              "Moisture in the portafilter basket leads to channeling and bitter espresso."
+            ],
+            "common_mistakes": [
+              "Grinding too far in advance, resulting in oxidized coffee."
+            ],
+            "source_reference": "Step 2 of owner operational manual"
+          },
+          {
+            "step_number": 3,
+            "title": "Tamping and Espresso Extraction",
+            "instructions": "Level the coffee grounds gently. Hold the tamper perpendicular and press firmly with approximately 15 kg of even pressure. Lock portafilter firmly into group head and immediately begin extraction. Extract 36ml of double espresso in 25 to 30 seconds.",
+            "expected_outcome": "A rich double espresso shot with dense golden-hazelnut crema.",
+            "materials": [
+              "Calibrated tamper",
+              "Pre-warmed ceramic cappuccino cup"
+            ],
+            "warnings": [
+              "Do not bang the portafilter after tamping, as this cracks the coffee puck."
+            ],
+            "common_mistakes": [
+              "Uneven tamping causing fast watery flow under 20 seconds."
+            ],
+            "source_reference": "Step 3 of owner operational manual"
+          },
+          {
+            "step_number": 4,
+            "title": "Milk Steaming and Microfoam Creation",
+            "instructions": "Pour 150 ml of cold milk (4°C) into the stainless steel pitcher. Purge steam wand for 1 second. Submerge wand tip 1 cm below milk surface at an angle to create a whirlpool vortex. Stretch milk until warm to touch, then submerge slightly deeper until thermometer reads 60–65°C.",
+            "expected_outcome": "Silky, glossy microfoam resembling wet paint with no large bubbles.",
+            "materials": [
+              "Cold whole milk",
+              "Frothing pitcher",
+              "Milk thermometer"
+            ],
+            "warnings": [
+              "Never heat milk above 70°C as proteins burn and create bitter, sour flavors. Steam wand burns skin quickly."
+            ],
+            "common_mistakes": [
+              "Holding steam wand too deep early on, causing heated flat milk without foam."
+            ],
+            "source_reference": "Step 4 of owner operational manual"
+          },
+          {
+            "step_number": 5,
+            "title": "Pouring and Cup Integration",
+            "instructions": "Swirl and tap the pitcher on the counter to settle foam. Slowly pour steamed milk into the center of the espresso shot from a height of 5 cm to integrate milk and crema, then lower the spout close to the surface to finish with a clean white foam circle or latte art.",
+            "expected_outcome": "Harmonious drink balance of 1/3 espresso, 1/3 steamed milk, and 1/3 velvety microfoam.",
+            "materials": [
+              "Cappuccino cup with extracted espresso"
+            ],
+            "warnings": [
+              "Pour slowly to avoid splashing hot liquid on hands or counter."
+            ],
+            "common_mistakes": [
+              "Dumping milk too fast, breaking the golden crema ring."
+            ],
+            "source_reference": "Step 5 of owner operational manual"
+          },
+          {
+            "step_number": 6,
+            "title": "Steam Wand Cleaning and Station Sanitization",
+            "instructions": "Immediately wipe the steam wand with a dedicated damp microfiber cloth. Purge steam wand for 2 seconds to blow out internal milk residue. Knock out used coffee puck and rinse portafilter.",
+            "expected_outcome": "Pristine steam wand free of baked milk crust and tidy barista station.",
+            "materials": [
+              "Damp microfiber cloth"
+            ],
+            "warnings": [
+              "Always point steam wand down into the drip tray when purging to prevent steam burns."
+            ],
+            "common_mistakes": [
+              "Delaying wand wiping, causing milk to bake onto wand and breed bacteria."
+            ],
+            "source_reference": "Step 6 of owner operational manual"
+          },
+          {
+            "step_number": 7,
+            "title": "Service and Customer Confirmation",
+            "instructions": "Place the cappuccino cup on a clean saucer with a teaspoon and brown sugar sachet. Serve to customer with a smile within 60 seconds of preparation. Warmly confirm order: \"Here is your fresh Cappuccino, enjoy!\"",
+            "expected_outcome": "Delighted customer receiving hot, fresh coffee with verified order accuracy.",
+            "materials": [
+              "Ceramic saucer",
+              "Teaspoon",
+              "Napkin"
+            ],
+            "warnings": [
+              "Ensure saucer base is dry to avoid cup sliding."
+            ],
+            "common_mistakes": [
+              "Letting cup sit on counter until foam collapses."
+            ],
+            "source_reference": "Step 7 of owner operational manual"
+          }
+        ],
+        "completion_checklist": [
+          "Espresso extracted between 25-30s with rich crema",
+          "Milk steamed between 60-65°C with silky microfoam",
+          "Steam wand wiped and purged immediately",
+          "Served hot with clean saucer and smile"
+        ],
+        "knowledge_gaps": [],
+        "owner_review_required": false
+      },
+      "quiz_json": {
+        "passing_score": 80,
+        "questions": [
+          {
+            "question": "What is the correct dose of coffee beans for preparing a standard double espresso shot?",
+            "type": "multiple_choice",
+            "options": [
+              "12 grams",
+              "18 grams",
+              "25 grams",
+              "30 grams"
+            ],
+            "correct_answer_index": 1,
+            "explanation": "According to Step 2 of the SOP, exactly 18.0 grams of fresh coffee beans should be ground into the portafilter basket.",
+            "source_step_numbers": [
+              2
+            ]
+          },
+          {
+            "question": "What is the ideal extraction time window for 36ml of double espresso?",
+            "type": "multiple_choice",
+            "options": [
+              "10 to 15 seconds",
+              "15 to 20 seconds",
+              "25 to 30 seconds",
+              "40 to 50 seconds"
+            ],
+            "correct_answer_index": 2,
+            "explanation": "Step 3 states that 36ml of double espresso should be extracted in 25 to 30 seconds for optimal flavor extraction.",
+            "source_step_numbers": [
+              3
+            ]
+          },
+          {
+            "question": "What is the target temperature range when steaming milk for a cappuccino?",
+            "type": "multiple_choice",
+            "options": [
+              "40–45°C",
+              "50–55°C",
+              "60–65°C",
+              "80–85°C"
+            ],
+            "correct_answer_index": 2,
+            "explanation": "Step 4 specifies steaming cold milk to 60–65°C to create sweet, velvety microfoam without scorching milk proteins.",
+            "source_step_numbers": [
+              4
+            ]
+          },
+          {
+            "question": "Why must you immediately wipe and purge the steam wand after steaming milk?",
+            "type": "scenario",
+            "options": [
+              "To look busy in front of customers",
+              "To prevent milk from baking onto wand and blowing out internal residue",
+              "To cool down the coffee machine quickly",
+              "To decrease machine water pressure"
+            ],
+            "correct_answer_index": 1,
+            "explanation": "Step 6 highlights wiping immediately to prevent milk crust from baking onto hot metal and purging to blow out any milk sucked into the wand tip.",
+            "source_step_numbers": [
+              6
+            ]
+          },
+          {
+            "question": "Within how many seconds should a fresh cappuccino be served to the customer?",
+            "type": "multiple_choice",
+            "options": [
+              "Within 60 seconds",
+              "Within 5 minutes",
+              "Within 10 minutes",
+              "Whenever barista is free"
+            ],
+            "correct_answer_index": 0,
+            "explanation": "Step 7 specifies serving the cappuccino within 60 seconds to ensure the customer receives hot coffee before the delicate microfoam begins to separate.",
+            "source_step_numbers": [
+              7
+            ]
+          }
+        ]
+      },
+      "source_transcript": "1. Wash hands and clean the espresso machine.\n2. Grind 18 grams of fresh coffee beans.\n3. Tamp the coffee evenly and extract espresso for 25–30 seconds.\n4. Steam 150 ml of cold milk to 60–65°C, creating smooth microfoam.\n5. Pour milk slowly into the espresso.\n6. Wipe the steam wand and clean the machine after use.\n7. Serve immediately and confirm the customer order.",
+      "reviewed_by": "user-owner-01",
+      "reviewed_at": "2026-09-26T08:54:10.246Z",
+      "published_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "training_assignments": [
+    {
+      "id": "asgn-priya-01",
+      "business_id": "biz-daily-grind-01",
+      "training_module_id": "train-cappuccino-01",
+      "training_version_id": "ver-cappuccino-v1",
+      "employee_id": "user-emp-priya-02",
+      "assigned_by": "user-owner-01",
+      "due_date": "2026-10-01T08:54:10.246Z",
+      "status": "in_progress",
+      "assigned_at": "2026-09-26T08:54:10.246Z"
+    },
+    {
+      "id": "asgn-rahul-01",
+      "business_id": "biz-daily-grind-01",
+      "training_module_id": "train-cappuccino-01",
+      "training_version_id": "ver-cappuccino-v1",
+      "employee_id": "user-emp-rahul-01",
+      "assigned_by": "user-owner-01",
+      "due_date": "2026-09-29T08:54:10.246Z",
+      "status": "completed",
+      "assigned_at": "2026-09-26T08:54:10.246Z",
+      "completed_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "training_progress": [
+    {
+      "id": "prog-priya-01",
+      "assignment_id": "asgn-priya-01",
+      "completed_steps": [
+        1,
+        2,
+        3
+      ],
+      "progress_percentage": 43,
+      "last_step": 3,
+      "updated_at": "2026-09-26T08:54:10.246Z"
+    },
+    {
+      "id": "prog-rahul-01",
+      "assignment_id": "asgn-rahul-01",
+      "completed_steps": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "progress_percentage": 100,
+      "last_step": 7,
+      "updated_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "quiz_attempts": [
+    {
+      "id": "quiz-att-rahul-01",
+      "assignment_id": "asgn-rahul-01",
+      "employee_id": "user-emp-rahul-01",
+      "score": 100,
+      "total_questions": 5,
+      "passed": true,
+      "answers_json": [
+        1,
+        2,
+        2,
+        1,
+        0
+      ],
+      "attempt_number": 1,
+      "completed_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "training_translations": [
+    {
+      "id": "trans-cappuccino-mr",
+      "training_version_id": "ver-cappuccino-v1",
+      "language": "Marathi",
+      "sop_json": {
+        "title": "कॅप्युचिनो बनवण्याची कार्यपद्धती (SOP)",
+        "summary": "कॅफेमधील पाहुण्यांसाठी दर्जेदार आणि चवदार कॅप्युचिनो तयार करण्यासाठी प्रमाणित मार्गदर्शक कार्यपद्धती.",
+        "language": "Marathi",
+        "estimated_duration": 8,
+        "prerequisites": [
+          "कॅफे स्वच्छता आणि सुरक्षा नियम समजून घेतलेले असावेत",
+          "एस्प्रेसो मशीन योग्य दाबावर (9 bar) चालू असावे",
+          "ताजे दूध 4°C तापमानावर थंड असावे"
+        ],
+        "materials": [
+          "कॉफी ग्राइंडर",
+          "१८ ग्रॅम ताजी कॉफी बीन्स",
+          "एस्प्रेसो मशीन आणि पोर्टाफिल्टर",
+          "५८ मिमी टॅम्पिंग टूल",
+          "स्टेनलेस स्टील मिल्क पिक्चर (३५० मिली)",
+          "१५० मिली थंड दूध",
+          "मिल्क थर्मामीटर",
+          "मायक्रोफायबर कापड"
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "title": "स्वच्छता आणि मशीनची तयारी",
+            "instructions": "२० सेकंद साबण आणि कोमट पाण्याने हात स्वच्छ धुवा. मशीनचे ग्रुप हेड २ सेकंद फ्लश करून जुनी कॉफी साफ करा.",
+            "expected_outcome": "हात स्वच्छ आणि ग्रुप हेड कॉफी गाळण्यासाठी तयार.",
+            "materials": [
+              "साबण",
+              "कोमट पाणी"
+            ],
+            "warnings": [
+              "ग्रुप हेड खूप गरम असते (९३°C), हाताने थेट स्पर्श करू नका."
+            ],
+            "common_mistakes": [
+              "फ्लश न करणे, ज्यामुळे कॉफीची चव कडवट लागते."
+            ],
+            "source_reference": "पायरी १"
+          },
+          {
+            "step_number": 2,
+            "title": "कॉफी बीन्स बारीक दळणे",
+            "instructions": "पोर्टाफिल्टर कोरड्या कापडाने पुसा. काट्यावर तंतोतंत १८ ग्रॅम ताजी कॉफी पावडर दळून घ्या.",
+            "expected_outcome": "१८ ग्रॅम व्यवस्थित दळलेली ताजी कॉफी पावडर.",
+            "materials": [
+              "कॉफी बीन्स",
+              "वजन काटा"
+            ],
+            "warnings": [
+              "फिल्टरमध्ये ओलावा असल्यास कॉफी खराब होते."
+            ],
+            "common_mistakes": [
+              "खूप आधी दळून ठेवणे, ज्यामुळे कॉफीचा सुगंध उडतो."
+            ],
+            "source_reference": "पायरी २"
+          },
+          {
+            "step_number": 3,
+            "title": "टॅम्पिंग आणि एस्प्रेसो काढणे",
+            "instructions": "कॉफी पावडर समान पातळीवर करा आणि १५ किलो दाबाने टँप करा. मशीनमध्ये लावून २५ ते ३० सेकंदात ३६ मिली एस्प्रेसो काढा.",
+            "expected_outcome": "सोनेरी रंगाची दाट फेस असलेली (Crema) एस्प्रेसो तयार होईल.",
+            "materials": [
+              "टॅम्पर",
+              "कप"
+            ],
+            "warnings": [
+              "टँप केल्यावर फिल्टरवर जोरात आदळू नका."
+            ],
+            "common_mistakes": [
+              "असमांतर टॅम्पिंगमुळे कॉफी पातळ आणि पाण्यासारखी निघणे."
+            ],
+            "source_reference": "पायरी ३"
+          },
+          {
+            "step_number": 4,
+            "title": "दूध वाफवणे (Steaming)",
+            "instructions": "१५० मिली थंड दूध भांड्यात घ्या. वाफेचा पाईप (Steam wand) दुधात १ सेमी बुडवून वाफ सोडा आणि तापमान ६०-६५°C पर्यंत आणा.",
+            "expected_outcome": "मखमली, चमकदार आणि बारीक फेस असलेले गरम दूध.",
+            "materials": [
+              "थंड दूध",
+              "भांडे",
+              "थर्मामीटर"
+            ],
+            "warnings": [
+              "दूध ७०°C च्या वर गरम करू नका, दुधाची चव बिघडते."
+            ],
+            "common_mistakes": [
+              "पाईप खूप खोल बुडवल्यास फेस तयार होत नाही."
+            ],
+            "source_reference": "पायरी ४"
+          },
+          {
+            "step_number": 5,
+            "title": "दूध आणि एस्प्रेसो एकत्र करणे",
+            "instructions": "वाफवलेले दूध ५ सेमी उंचीवरून हळूच एस्प्रेसोच्या मध्यभागी ओता आणि शेवटी सुंदर पांढरा फेस तयार करा.",
+            "expected_outcome": "१/३ एस्प्रेसो, १/३ गरम दूध आणि १/३ मखमली फेस असलेला संतुलित कॅप्युचिनो.",
+            "materials": [
+              "कॅप्युचिनो कप"
+            ],
+            "warnings": [
+              "गरम दूध अंगावर उडणार नाही याची काळजी घ्या."
+            ],
+            "common_mistakes": [
+              "दूध खूप वेगाने ओतल्यास क्रीम विरघळते."
+            ],
+            "source_reference": "पायरी ५"
+          },
+          {
+            "step_number": 6,
+            "title": "वाफेचा पाईप स्वच्छ करणे",
+            "instructions": "दुधाचे काम संपताच पाईप ओल्या कापडाने ताबडतोब पुसा आणि २ सेकंद वाफ सोडून आतील दूध बाहेर टाका.",
+            "expected_outcome": "स्वच्छ पाईप आणि निरोगी कामाची जागा.",
+            "materials": [
+              "मायक्रोफायबर कापड"
+            ],
+            "warnings": [
+              "वाफ सोडताना पाईप नेहमी खालच्या दिशेने ठेवा."
+            ],
+            "common_mistakes": [
+              "पाईप न पुसल्यास दुधाचा थर जमून घाण वास येतो."
+            ],
+            "source_reference": "पायरी ६"
+          },
+          {
+            "step_number": 7,
+            "title": "ग्राहकाला आदराने सर्व्ह करणे",
+            "instructions": "कॅप्युचिनो कप सॉसरवर ठेवा, सोबत चमचा द्या. ६० सेकंदांच्या आत हसतमुखाने ग्राहकास द्या: \"हा घ्या तुमचा गरमागरम कॅप्युचिनो!\".",
+            "expected_outcome": "आनंदी ग्राहक आणि अचूक ऑर्डर सेवा.",
+            "materials": [
+              "सॉसर",
+              "चमचा"
+            ],
+            "warnings": [
+              "सॉसर कोरडी असल्याची खात्री करा."
+            ],
+            "common_mistakes": [
+              "कॉफी बराच वेळ काउंटरवर ठेवणे ज्यामुळे फेस बसतो."
+            ],
+            "source_reference": "पायरी ७"
+          }
+        ],
+        "completion_checklist": [
+          "२५-३० सेकंदात एस्प्रेसो काढली",
+          "दूध ६०-६५°C वर वाफवले",
+          "पाईप लगेच पुसून वाफ काढली",
+          "६० सेकंदात हसतमुखाने सर्व्ह केले"
+        ],
+        "knowledge_gaps": [],
+        "owner_review_required": false
+      },
+      "quiz_json": {
+        "passing_score": 80,
+        "questions": [
+          {
+            "question": "What is the correct dose of coffee beans for preparing a standard double espresso shot?",
+            "type": "multiple_choice",
+            "options": [
+              "12 grams",
+              "18 grams",
+              "25 grams",
+              "30 grams"
+            ],
+            "correct_answer_index": 1,
+            "explanation": "According to Step 2 of the SOP, exactly 18.0 grams of fresh coffee beans should be ground into the portafilter basket.",
+            "source_step_numbers": [
+              2
+            ]
+          },
+          {
+            "question": "What is the ideal extraction time window for 36ml of double espresso?",
+            "type": "multiple_choice",
+            "options": [
+              "10 to 15 seconds",
+              "15 to 20 seconds",
+              "25 to 30 seconds",
+              "40 to 50 seconds"
+            ],
+            "correct_answer_index": 2,
+            "explanation": "Step 3 states that 36ml of double espresso should be extracted in 25 to 30 seconds for optimal flavor extraction.",
+            "source_step_numbers": [
+              3
+            ]
+          },
+          {
+            "question": "What is the target temperature range when steaming milk for a cappuccino?",
+            "type": "multiple_choice",
+            "options": [
+              "40–45°C",
+              "50–55°C",
+              "60–65°C",
+              "80–85°C"
+            ],
+            "correct_answer_index": 2,
+            "explanation": "Step 4 specifies steaming cold milk to 60–65°C to create sweet, velvety microfoam without scorching milk proteins.",
+            "source_step_numbers": [
+              4
+            ]
+          },
+          {
+            "question": "Why must you immediately wipe and purge the steam wand after steaming milk?",
+            "type": "scenario",
+            "options": [
+              "To look busy in front of customers",
+              "To prevent milk from baking onto wand and blowing out internal residue",
+              "To cool down the coffee machine quickly",
+              "To decrease machine water pressure"
+            ],
+            "correct_answer_index": 1,
+            "explanation": "Step 6 highlights wiping immediately to prevent milk crust from baking onto hot metal and purging to blow out any milk sucked into the wand tip.",
+            "source_step_numbers": [
+              6
+            ]
+          },
+          {
+            "question": "Within how many seconds should a fresh cappuccino be served to the customer?",
+            "type": "multiple_choice",
+            "options": [
+              "Within 60 seconds",
+              "Within 5 minutes",
+              "Within 10 minutes",
+              "Whenever barista is free"
+            ],
+            "correct_answer_index": 0,
+            "explanation": "Step 7 specifies serving the cappuccino within 60 seconds to ensure the customer receives hot coffee before the delicate microfoam begins to separate.",
+            "source_step_numbers": [
+              7
+            ]
+          }
+        ]
+      },
+      "created_at": "2026-09-26T08:54:10.246Z"
+    },
+    {
+      "id": "trans-cappuccino-hi",
+      "training_version_id": "ver-cappuccino-v1",
+      "language": "Hindi",
+      "sop_json": {
+        "title": "कैपुचीनो बनाने की मानक प्रक्रिया (SOP)",
+        "summary": "कैफे के ग्राहकों के लिए उच्च गुणवत्ता और स्वादिष्ट कैपुचीनो तैयार करने की चरणबद्ध मार्गदर्शिका।",
+        "language": "Hindi",
+        "estimated_duration": 8,
+        "prerequisites": [
+          "Completed basic café safety and hygiene induction",
+          "Espresso machine warmed up to operating pressure (9 bar)",
+          "Fresh whole milk refrigerated at 4°C"
+        ],
+        "materials": [
+          "Commercial espresso grinder",
+          "18g fresh specialty coffee beans",
+          "Commercial espresso machine & portafilter",
+          "Calibrated 58mm coffee tamper",
+          "Stainless steel milk frothing pitcher (350ml)",
+          "150ml cold whole milk",
+          "Digital milk thermometer",
+          "Clean microfiber cloth for steam wand"
+        ],
+        "steps": [
+          {
+            "step_number": 1,
+            "title": "स्वच्छता और मशीन की तैयारी",
+            "instructions": "Thoroughly wash and sanitize hands with warm water and soap for 20 seconds. Inspect the espresso group head and run a 2-second blank water flush to clear residual coffee oils.",
+            "expected_outcome": "Hands are sanitized and group head is clean and pre-warmed for brewing.",
+            "materials": [
+              "Sanitizing soap",
+              "Warm water"
+            ],
+            "warnings": [
+              "Group head and shower screen are extremely hot (93°C). Do not touch directly with bare hands."
+            ],
+            "common_mistakes": [
+              "Skipping the blank water flush, which causes stale coffee taste."
+            ],
+            "source_reference": "Step 1 of owner operational manual"
+          },
+          {
+            "step_number": 2,
+            "title": "कॉफी बीन्स का सटीक वजन और पिसाई",
+            "instructions": "Remove the portafilter, wipe the basket dry with a clean cloth. Grind exactly 18.0 grams of fresh coffee beans directly into the portafilter basket.",
+            "expected_outcome": "Dry basket filled with 18g clump-free espresso coffee grounds.",
+            "materials": [
+              "Specialty coffee beans",
+              "Digital precision scale"
+            ],
+            "warnings": [
+              "Moisture in the portafilter basket leads to channeling and bitter espresso."
+            ],
+            "common_mistakes": [
+              "Grinding too far in advance, resulting in oxidized coffee."
+            ],
+            "source_reference": "Step 2 of owner operational manual"
+          },
+          {
+            "step_number": 3,
+            "title": "टैम्पिंग और एस्प्रेसो निकालना",
+            "instructions": "Level the coffee grounds gently. Hold the tamper perpendicular and press firmly with approximately 15 kg of even pressure. Lock portafilter firmly into group head and immediately begin extraction. Extract 36ml of double espresso in 25 to 30 seconds.",
+            "expected_outcome": "A rich double espresso shot with dense golden-hazelnut crema.",
+            "materials": [
+              "Calibrated tamper",
+              "Pre-warmed ceramic cappuccino cup"
+            ],
+            "warnings": [
+              "Do not bang the portafilter after tamping, as this cracks the coffee puck."
+            ],
+            "common_mistakes": [
+              "Uneven tamping causing fast watery flow under 20 seconds."
+            ],
+            "source_reference": "Step 3 of owner operational manual"
+          },
+          {
+            "step_number": 4,
+            "title": "दूध को स्टीम करना और माइक्रोफोम बनाना",
+            "instructions": "Pour 150 ml of cold milk (4°C) into the stainless steel pitcher. Purge steam wand for 1 second. Submerge wand tip 1 cm below milk surface at an angle to create a whirlpool vortex. Stretch milk until warm to touch, then submerge slightly deeper until thermometer reads 60–65°C.",
+            "expected_outcome": "Silky, glossy microfoam resembling wet paint with no large bubbles.",
+            "materials": [
+              "Cold whole milk",
+              "Frothing pitcher",
+              "Milk thermometer"
+            ],
+            "warnings": [
+              "Never heat milk above 70°C as proteins burn and create bitter, sour flavors. Steam wand burns skin quickly."
+            ],
+            "common_mistakes": [
+              "Holding steam wand too deep early on, causing heated flat milk without foam."
+            ],
+            "source_reference": "Step 4 of owner operational manual"
+          },
+          {
+            "step_number": 5,
+            "title": "कप में दूध और एस्प्रेसो मिलाना",
+            "instructions": "Swirl and tap the pitcher on the counter to settle foam. Slowly pour steamed milk into the center of the espresso shot from a height of 5 cm to integrate milk and crema, then lower the spout close to the surface to finish with a clean white foam circle or latte art.",
+            "expected_outcome": "Harmonious drink balance of 1/3 espresso, 1/3 steamed milk, and 1/3 velvety microfoam.",
+            "materials": [
+              "Cappuccino cup with extracted espresso"
+            ],
+            "warnings": [
+              "Pour slowly to avoid splashing hot liquid on hands or counter."
+            ],
+            "common_mistakes": [
+              "Dumping milk too fast, breaking the golden crema ring."
+            ],
+            "source_reference": "Step 5 of owner operational manual"
+          },
+          {
+            "step_number": 6,
+            "title": "स्टीम वैंड की तुरंत सफाई",
+            "instructions": "Immediately wipe the steam wand with a dedicated damp microfiber cloth. Purge steam wand for 2 seconds to blow out internal milk residue. Knock out used coffee puck and rinse portafilter.",
+            "expected_outcome": "Pristine steam wand free of baked milk crust and tidy barista station.",
+            "materials": [
+              "Damp microfiber cloth"
+            ],
+            "warnings": [
+              "Always point steam wand down into the drip tray when purging to prevent steam burns."
+            ],
+            "common_mistakes": [
+              "Delaying wand wiping, causing milk to bake onto wand and breed bacteria."
+            ],
+            "source_reference": "Step 6 of owner operational manual"
+          },
+          {
+            "step_number": 7,
+            "title": "ग्राहक को परोसना",
+            "instructions": "Place the cappuccino cup on a clean saucer with a teaspoon and brown sugar sachet. Serve to customer with a smile within 60 seconds of preparation. Warmly confirm order: \"Here is your fresh Cappuccino, enjoy!\"",
+            "expected_outcome": "Delighted customer receiving hot, fresh coffee with verified order accuracy.",
+            "materials": [
+              "Ceramic saucer",
+              "Teaspoon",
+              "Napkin"
+            ],
+            "warnings": [
+              "Ensure saucer base is dry to avoid cup sliding."
+            ],
+            "common_mistakes": [
+              "Letting cup sit on counter until foam collapses."
+            ],
+            "source_reference": "Step 7 of owner operational manual"
+          }
+        ],
+        "completion_checklist": [
+          "Espresso extracted between 25-30s with rich crema",
+          "Milk steamed between 60-65°C with silky microfoam",
+          "Steam wand wiped and purged immediately",
+          "Served hot with clean saucer and smile"
+        ],
+        "knowledge_gaps": [],
+        "owner_review_required": false
+      },
+      "quiz_json": {
+        "passing_score": 80,
+        "questions": [
+          {
+            "question": "What is the correct dose of coffee beans for preparing a standard double espresso shot?",
+            "type": "multiple_choice",
+            "options": [
+              "12 grams",
+              "18 grams",
+              "25 grams",
+              "30 grams"
+            ],
+            "correct_answer_index": 1,
+            "explanation": "According to Step 2 of the SOP, exactly 18.0 grams of fresh coffee beans should be ground into the portafilter basket.",
+            "source_step_numbers": [
+              2
+            ]
+          },
+          {
+            "question": "What is the ideal extraction time window for 36ml of double espresso?",
+            "type": "multiple_choice",
+            "options": [
+              "10 to 15 seconds",
+              "15 to 20 seconds",
+              "25 to 30 seconds",
+              "40 to 50 seconds"
+            ],
+            "correct_answer_index": 2,
+            "explanation": "Step 3 states that 36ml of double espresso should be extracted in 25 to 30 seconds for optimal flavor extraction.",
+            "source_step_numbers": [
+              3
+            ]
+          },
+          {
+            "question": "What is the target temperature range when steaming milk for a cappuccino?",
+            "type": "multiple_choice",
+            "options": [
+              "40–45°C",
+              "50–55°C",
+              "60–65°C",
+              "80–85°C"
+            ],
+            "correct_answer_index": 2,
+            "explanation": "Step 4 specifies steaming cold milk to 60–65°C to create sweet, velvety microfoam without scorching milk proteins.",
+            "source_step_numbers": [
+              4
+            ]
+          },
+          {
+            "question": "Why must you immediately wipe and purge the steam wand after steaming milk?",
+            "type": "scenario",
+            "options": [
+              "To look busy in front of customers",
+              "To prevent milk from baking onto wand and blowing out internal residue",
+              "To cool down the coffee machine quickly",
+              "To decrease machine water pressure"
+            ],
+            "correct_answer_index": 1,
+            "explanation": "Step 6 highlights wiping immediately to prevent milk crust from baking onto hot metal and purging to blow out any milk sucked into the wand tip.",
+            "source_step_numbers": [
+              6
+            ]
+          },
+          {
+            "question": "Within how many seconds should a fresh cappuccino be served to the customer?",
+            "type": "multiple_choice",
+            "options": [
+              "Within 60 seconds",
+              "Within 5 minutes",
+              "Within 10 minutes",
+              "Whenever barista is free"
+            ],
+            "correct_answer_index": 0,
+            "explanation": "Step 7 specifies serving the cappuccino within 60 seconds to ensure the customer receives hot coffee before the delicate microfoam begins to separate.",
+            "source_step_numbers": [
+              7
+            ]
+          }
+        ]
+      },
+      "created_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "knowledge_questions": [
+    {
+      "id": "kq-01",
+      "business_id": "biz-daily-grind-01",
+      "employee_id": "user-emp-priya-02",
+      "training_module_id": "train-cappuccino-01",
+      "question": "दूध किती तापमानापर्यंत वाफवायचे आहे?",
+      "answer": "कॅप्युचिनो तयार करताना थंड दूध ६०°C ते ६५°C (60–65°C) पर्यंत वाफवायचे असते, ज्यामुळे मखमली माइक्रोफोम तयार होतो. दूध कधीही ७०°C च्या वर गरम करू नका.",
+      "source_references": [
+        "Cappuccino Preparation — Step 4 (Milk Steaming and Microfoam Creation)"
+      ],
+      "escalated": false,
+      "created_at": "2026-09-26T08:54:10.246Z"
+    }
+  ],
+  "processing_jobs": [],
+  "system_settings": {
+    "gemini_api_key": "",
+    "gemini_model": "gemini-2.5-flash",
+    "is_demo_mode": true
+  }
+}
