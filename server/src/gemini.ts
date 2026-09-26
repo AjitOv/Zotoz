@@ -60,7 +60,41 @@ function getApiKey(customKey?: string): string | undefined {
 }
 
 function getModelName(): string {
-  return process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  return process.env.GEMINI_MODEL || 'gemini-3.5-flash';
+}
+
+const FALLBACK_MODELS = ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-flash-latest'];
+
+async function generateWithModelFallback(
+  ai: GoogleGenAI,
+  options: {
+    contents: string;
+    systemInstruction?: string;
+    responseMimeType?: string;
+    preferredModel?: string;
+  }
+): Promise<{ text: string; usedModel: string }> {
+  const preferred = options.preferredModel || getModelName();
+  const candidates = [preferred, ...FALLBACK_MODELS.filter((m) => m !== preferred)];
+
+  let lastError: any = null;
+  for (const candidate of candidates) {
+    try {
+      const resp = await ai.models.generateContent({
+        model: candidate,
+        contents: options.contents,
+        config: {
+          ...(options.systemInstruction && { systemInstruction: options.systemInstruction }),
+          ...(options.responseMimeType && { responseMimeType: options.responseMimeType }),
+        },
+      });
+      return { text: resp.text || '', usedModel: candidate };
+    } catch (err: any) {
+      console.warn(`Gemini attempt with ${candidate} failed: ${err.message}.`);
+      lastError = err;
+    }
+  }
+  throw lastError;
 }
 
 function cleanJsonResponse(text: string): string {
@@ -163,16 +197,13 @@ Output pure JSON conforming to this schema:
 }`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: modelName,
+    const { text, usedModel } = await generateWithModelFallback(ai, {
       contents: prompt,
-      config: {
-        systemInstruction,
-        responseMimeType: 'application/json',
-      },
+      systemInstruction,
+      responseMimeType: 'application/json',
+      preferredModel: modelName,
     });
 
-    const text = response.text || '';
     const cleaned = cleanJsonResponse(text);
     const parsedJson = JSON.parse(cleaned);
     const validated = SOPSchema.parse(parsedJson);
@@ -180,7 +211,7 @@ Output pure JSON conforming to this schema:
     return {
       data: validated,
       isRealAI: true,
-      model: modelName,
+      model: usedModel,
     };
   } catch (err: any) {
     console.error('Gemini SOP Generation Error:', err);
@@ -233,20 +264,18 @@ Owner's Adjustment Instructions:
 Update the step accordingly. Do not invent steps outside the owner instructions. Return pure JSON matching the SOPStep schema.`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: modelName,
+    const { text, usedModel } = await generateWithModelFallback(ai, {
       contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-      },
+      responseMimeType: 'application/json',
+      preferredModel: modelName,
     });
 
-    const parsed = JSON.parse(cleanJsonResponse(response.text || '{}'));
+    const parsed = JSON.parse(cleanJsonResponse(text));
     const validated = SOPStepSchema.parse(parsed);
     return {
       data: validated,
       isRealAI: true,
-      model: modelName,
+      model: usedModel,
     };
   } catch (err: any) {
     console.error('Gemini step regeneration error:', err);
@@ -317,20 +346,18 @@ Input SOP:
 ${JSON.stringify(sop, null, 2)}`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: modelName,
+    const { text, usedModel } = await generateWithModelFallback(ai, {
       contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-      },
+      responseMimeType: 'application/json',
+      preferredModel: modelName,
     });
 
-    const parsed = JSON.parse(cleanJsonResponse(response.text || '{}'));
+    const parsed = JSON.parse(cleanJsonResponse(text));
     const validated = SOPSchema.parse(parsed);
     return {
       data: validated,
       isRealAI: true,
-      model: modelName,
+      model: usedModel,
     };
   } catch (err: any) {
     console.error('Gemini Translation Error:', err);
@@ -379,7 +406,7 @@ export async function generateQuiz(
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const prompt = `You are an assessment specialist for Indian SMB workplace training.
+  const prompt = `You are an assessment specialist for Indian SME workplace training.
 Generate a 5-question knowledge check quiz based strictly on the approved SOP below.
 Requirements:
 - 5 high-quality questions (mix of multiple_choice and scenario-based).
@@ -408,20 +435,18 @@ Return pure JSON conforming to this schema:
 }`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: modelName,
+    const { text, usedModel } = await generateWithModelFallback(ai, {
       contents: prompt,
-      config: {
-        responseMimeType: 'application/json',
-      },
+      responseMimeType: 'application/json',
+      preferredModel: modelName,
     });
 
-    const parsed = JSON.parse(cleanJsonResponse(response.text || '{}'));
+    const parsed = JSON.parse(cleanJsonResponse(text));
     const validated = QuizSchema.parse(parsed);
     return {
       data: validated,
       isRealAI: true,
-      model: modelName,
+      model: usedModel,
     };
   } catch (err: any) {
     console.error('Gemini Quiz Generation Error:', err);
@@ -548,15 +573,12 @@ Employee Question (in ${employeeLanguage}):
 Provide a concise, helpful answer strictly grounded in the approved training above. If grounded, include citation line at the bottom: "Source: [Training Title] - Step X".`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: modelName,
+    const { text: answerText, usedModel } = await generateWithModelFallback(ai, {
       contents: prompt,
-      config: {
-        systemInstruction,
-      },
+      systemInstruction,
+      preferredModel: modelName,
     });
 
-    const answerText = response.text || '';
     const isUnanswerable =
       answerText.toLowerCase().includes("couldn't find that instruction") ||
       answerText.toLowerCase().includes('ask your manager');
@@ -579,7 +601,7 @@ Provide a concise, helpful answer strictly grounded in the approved training abo
       sourceReferences: sources,
       isRealAI: true,
       canEscalate: isUnanswerable,
-      model: modelName,
+      model: usedModel,
     };
   } catch (err: any) {
     console.error('Gemini Assistant Error:', err);

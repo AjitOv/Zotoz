@@ -235,7 +235,7 @@ export const Overview: React.FC<OverviewProps> = ({ onNavigate }) => {
           <div className="p-5 rounded-xl bg-[#0B1220] border border-[#2A3C5B] space-y-3">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#B8F34A]" />
-              How Zotoz Solves Employee Turnover for Indian SMBs
+              How Zotoz Solves Employee Turnover for Indian SMEs
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-[#9CAFC8]">
               <div className="p-3 rounded-lg bg-[#182337] border border-[#2A3C5B]/60">

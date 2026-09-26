@@ -27,13 +27,20 @@ interface CreateTrainingProps {
 
 type CaptureMode = 'manual' | 'record_video' | 'record_voice' | 'upload_file';
 
-const SAMPLE_CAFE_TRANSCRIPT = `1. Wash hands with soap and water for 20 seconds, and wipe portafilter dry.
-2. Grind 18 grams of fresh espresso coffee beans into the portafilter basket.
-3. Tamp the coffee grounds evenly with 15kg pressure and extract 36ml double espresso in 25–30 seconds.
-4. Steam 150 ml of cold milk to 60–65°C to create silky, glossy microfoam.
-5. Pour milk slowly into the espresso to create a smooth velvety cappuccino.
-6. Immediately wipe the steam wand with a damp microfiber cloth and purge steam for 2 seconds.
-7. Serve to the guest within 60 seconds on a clean saucer with a teaspoon and confirm order.`;
+const SAMPLE_APEX_DISPATCH_TRANSCRIPT = `1. Check the printed picking slip against the item SKU code, quantity, and customer name on the order portal.
+2. Select the correct heavy-duty 5-ply corrugated carton box matching the volume of ordered office & business supplies.
+3. Wrap all fragile products (toner cartridges, glass dispensers, desk organizers) with two layers of 10mm bubble wrap and tape edges.
+4. Fill all remaining carton void space with recyclable kraft paper cushion to prevent movement during transit.
+5. Seal the top and bottom center seams and box edges with Apex Supplies branded tamper-evident reinforced security tape in an 'H' pattern.
+6. Affix the printed GST Tax Invoice and barcode shipping label on the flat top surface without covering the barcodes with tape.
+7. Weigh the packed parcel on the digital platform scale, log the weight in the dispatch register, and move the parcel to the Delhivery/BlueDart carrier dispatch pallet.`;
+
+const SAMPLE_UPI_RECONCILIATION_TRANSCRIPT = `1. At 10 PM, lock the main cash drawer to secure physical contents.
+2. Open the Pine Labs POS terminal and print the daily UPI settlement report slip.
+3. Compare the total settlement amount on the slip with the POS screen.
+4. Count physical cash in bundles of 500, 200, 100, 50, and 20 rupee notes and log in register.
+5. If there is a discrepancy over 50 rupees, immediately call Vikram on WhatsApp.
+6. Deposit cash into the drop safe and send a photo of the settlement slip to the manager WhatsApp group.`;
 
 export const CreateTraining: React.FC<CreateTrainingProps> = ({
   onNavigate,
@@ -46,7 +53,7 @@ export const CreateTraining: React.FC<CreateTrainingProps> = ({
   const [captureMode, setCaptureMode] = useState<CaptureMode>('manual');
 
   // Input states
-  const [manualTranscript, setManualTranscript] = useState(SAMPLE_CAFE_TRANSCRIPT);
+  const [manualTranscript, setManualTranscript] = useState(SAMPLE_APEX_DISPATCH_TRANSCRIPT);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
   // Recording states
@@ -61,13 +68,13 @@ export const CreateTraining: React.FC<CreateTrainingProps> = ({
   const timerIntervalRef = useRef<any>(null);
 
   // Metadata form
-  const [title, setTitle] = useState('Cappuccino Preparation Procedure');
-  const [department, setDepartment] = useState('Beverage & Barista');
-  const [targetRole, setTargetRole] = useState('Junior Barista / Frontline Staff');
+  const [title, setTitle] = useState('Outward Goods Packaging & Dispatch Procedure');
+  const [department, setDepartment] = useState('Warehouse & Logistics');
+  const [targetRole, setTargetRole] = useState('Packaging & Dispatch Associate');
   const [language, setLanguage] = useState('English');
   const [difficulty, setDifficulty] = useState('Beginner');
   const [additionalContext, setAdditionalContext] = useState(
-    'Specialty coffee station rules: Never burn milk above 70°C. Steam wand must be wiped immediately.'
+    'Apex Supplies warehouse standards: Always double-tape boxes weighing over 5kg. Fragile ink toners must be kept upright.'
   );
 
   // Stage progress during AI processing
@@ -408,17 +415,36 @@ export const CreateTraining: React.FC<CreateTrainingProps> = ({
                   <label className="text-xs font-semibold text-[#9CAFC8]">
                     Enter or paste process instructions:
                   </label>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setManualTranscript(SAMPLE_CAFE_TRANSCRIPT);
-                      showNotification('Sample café cappuccino procedure loaded!', 'info');
-                    }}
-                    className="text-xs text-[#B8F34A] hover:underline flex items-center gap-1 font-medium"
-                  >
-                    <RefreshCw className="w-3 h-3" />
-                    <span>Reset Sample Café Recipe</span>
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setManualTranscript(SAMPLE_APEX_DISPATCH_TRANSCRIPT);
+                        setTitle('Outward Goods Packaging & Dispatch Procedure');
+                        setDepartment('Warehouse & Logistics');
+                        setTargetRole('Packaging & Dispatch Associate');
+                        showNotification('Apex Supplies dispatch procedure loaded!', 'info');
+                      }}
+                      className="text-xs text-[#B8F34A] hover:underline flex items-center gap-1 font-medium"
+                    >
+                      <RefreshCw className="w-3 h-3" />
+                      <span>Apex Dispatch Template</span>
+                    </button>
+                    <span className="text-[#2A3C5B]">|</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setManualTranscript(SAMPLE_UPI_RECONCILIATION_TRANSCRIPT);
+                        setTitle('Daily UPI & Cash Register Reconciliation');
+                        setDepartment('Billing & Accounts');
+                        setTargetRole('Cashier / Front Desk');
+                        showNotification('UPI & Cash register procedure loaded!', 'info');
+                      }}
+                      className="text-xs text-[#9CAFC8] hover:text-white hover:underline flex items-center gap-1 font-medium"
+                    >
+                      <span>UPI Reconciliation</span>
+                    </button>
+                  </div>
                 </div>
                 <textarea
                   rows={8}

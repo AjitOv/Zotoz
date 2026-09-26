@@ -32,9 +32,9 @@ export const OnboardingModal: React.FC = () => {
   const [step, setStep] = useState(1);
 
   // Business profile form
-  const [bizName, setBizName] = useState(business?.name || 'The Daily Grind Café');
-  const [bizCategory, setBizCategory] = useState(business?.category || 'Café & Restaurant');
-  const [bizLocation, setBizLocation] = useState(business?.location || 'Bandra West, Mumbai');
+  const [bizName, setBizName] = useState(business?.name || 'Apex Supplies');
+  const [bizCategory, setBizCategory] = useState(business?.category || 'SME · Business supplies');
+  const [bizLocation, setBizLocation] = useState(business?.location || 'MIDC Bhosari, Pune');
   const [employeeCount, setEmployeeCount] = useState('1 - 10 employees');
   const [defaultLang, setDefaultLang] = useState('English');
 
@@ -169,7 +169,7 @@ export const OnboardingModal: React.FC = () => {
                   value={bizName}
                   onChange={(e) => setBizName(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-lg bg-[#0B1220] border border-[#2A3C5B] text-white focus:border-[#B8F34A] focus:outline-none"
-                  placeholder="e.g. The Daily Grind Café"
+                  placeholder="e.g. Apex Supplies"
                 />
               </div>
 

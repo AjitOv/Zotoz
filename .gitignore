@@ -15,6 +15,10 @@ dist/
 server/uploads/*
 !server/uploads/.gitkeep
 
+# Runtime JSON Databases
+data/*.json
+server/data/*.json
+
 # System & Editor
 .DS_Store
 *.log

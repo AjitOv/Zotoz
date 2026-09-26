@@ -1,7 +1,7 @@
 # Zotoz Capture — AI-Powered Business Training Platform
 
 > **Record Once. Train Every Employee.**  
-> *AI-powered, voice-first, multilingual business knowledge and frontline employee training platform for Indian SMBs.*
+> *AI-powered, voice-first, multilingual business knowledge and frontline employee training platform for Indian SMEs.*
 
 ---
 
@@ -11,7 +11,7 @@ Every Indian business owner has immense operational knowledge locked inside thei
 
 **Zotoz Capture** transforms everyday owner demonstrations—recorded via phone camera, microphone, or voice memo—into verified standard operating procedures (SOPs), step-by-step visual training modules, knowledge-check quizzes, and a grounded conversational AI assistant in Indian regional languages (Marathi, Hindi, Tamil, Telugu, Gujarati, and English).
 
-### Target SMB Verticals:
+### Target SME Verticals:
 - **Cafés, Bakeries, Restaurants & Hotels**: Consistency in recipes, hygiene, espresso preparation, table service, billing, and machine maintenance.
 - **Retail Shops & Supermarkets**: Stock replenishment, customer returns, opening/closing cash drawers.
 - **Manufacturing Workshops & Small Factories**: Tool calibration, machine safety, PPE protocols, quality checks.
@@ -38,10 +38,10 @@ Every Indian business owner has immense operational knowledge locked inside thei
   - Dual Storage Engine: Built-in local persistent JSON database (`server/data/db.json`) + full Supabase PostgreSQL migration schema (`supabase/schema.sql`)
 
 - **AI Engine**:
-  - **Google Gemini Flash** (`gemini-2.5-flash` or `gemini-1.5-flash`)
+  - **Google Gemini Flash** (`gemini-3.5-flash` or `gemini-flash-latest` with automatic dynamic fallback)
   - Server-side API key protection (keys are never exposed to client browsers)
   - Strict grounding & zero-hallucination prompts (unknown questions are deflected with *"I couldn't find that instruction in your approved training. Please ask your manager."*)
-  - **Zero-Friction Demo Mode**: The application runs completely without an API key by using labeled high-fidelity Indian SMB demonstration data and local pattern matching.
+  - **Zero-Friction Demo Mode**: The application runs completely without an API key by using labeled high-fidelity Indian SME demonstration data and local pattern matching.
 
 ---
 
@@ -83,7 +83,7 @@ npm run dev
 
 ## 4. End-to-End Startup Judge & Investor Demonstration Script
 
-The application includes seeded demonstration data for **The Daily Grind Café** (Mumbai), including owner **Vikram Mehta** and frontline baristas **Rahul Sharma** (English), **Priya Patil** (Marathi), and **Amit Kumar** (Hindi).
+The application includes seeded demonstration data for **Apex Supplies (SME · Business supplies, Pune)**, including owner **Vikram Mehta** and frontline warehouse & dispatch associates **Rahul Sharma** (English), **Priya Patil** (Marathi), and **Amit Kumar** (Hindi).
 
 Follow this step-by-step walkthrough to present the product:
 
@@ -92,8 +92,8 @@ Follow this step-by-step walkthrough to present the product:
    - Inspect the KPI summary: active employees, approved SOPs, average quiz scores, and employee Q&A feed.
 2. **Create New Training**:
    - Click **"+ Capture New SOP"**.
-   - Test Step 1: Either record a live camera video, record voice with the microphone, or click **"Reset Sample Café Recipe"** to load the 7-step cappuccino process.
-   - Click **"Next: Add Training Details"** to specify the target role (*Junior Barista*), department (*Beverage & Barista*), and critical safety rules (*Never heat milk above 70°C*).
+   - Test Step 1: Either record a live camera video, record voice with the microphone, or click **"Apex Dispatch Template"** to load the 7-step parcel packaging and dispatch workflow.
+   - Click **"Next: Add Training Details"** to specify the target role (*Packaging & Dispatch Associate*), department (*Warehouse & Logistics*), and safety/packaging rules (*Always double-tape boxes weighing over 5kg*).
    - Click **"Generate AI SOP & Quiz"**: Watch the sequential real-time AI stages extract numbered steps, expected outcomes, warnings, and 5 quiz questions.
 3. **Owner Review & Localization**:
    - In the **Training Library**, review the draft SOP.

@@ -161,7 +161,7 @@ export const Settings: React.FC = () => {
             <span>Zero-Friction Presentation Guarantee</span>
           </div>
           <p>
-            If you do not provide a Gemini API key, Zotoz automatically uses high-fidelity Indian SMB
+            If you do not provide a Gemini API key, Zotoz automatically uses high-fidelity Indian SME
             demonstration models and labeled sample procedures without failing or crashing. You can also paste your Gemini API key below to test live generation immediately.
           </p>
         </div>

@@ -102,10 +102,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Building2 className="w-4 h-4 text-[#B8F34A] shrink-0" />
               <div className="truncate">
                 <p className="text-xs font-semibold text-white truncate">
-                  {business?.name || 'The Daily Grind Café'}
+                  {business?.name || 'Apex Supplies'}
                 </p>
                 <p className="text-[10px] text-[#9CAFC8] truncate">
-                  {business?.category || 'Specialty Café'} • {business?.location || 'Mumbai'}
+                  {business?.category || 'SME · Business supplies'} • {business?.location || 'Pune'}
                 </p>
               </div>
             </div>

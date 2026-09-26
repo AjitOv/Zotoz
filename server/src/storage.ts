@@ -1,5 +1,8 @@
+import './env.js';
 import fs from 'fs';
 import path from 'path';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import ws from 'ws';
 import {
   Business,
   User,
@@ -30,6 +33,8 @@ interface DatabaseSchema {
     gemini_api_key?: string;
     gemini_model?: string;
     is_demo_mode: boolean;
+    storage_type: 'supabase' | 'local';
+    supabase_connected: boolean;
   };
 }
 
@@ -327,9 +332,9 @@ function createInitialDatabase(): DatabaseSchema {
     businesses: [
       {
         id: SEED_BUSINESS_ID,
-        name: 'The Daily Grind Café',
-        category: 'Café & Specialty Coffee',
-        location: 'Bandra West, Mumbai',
+        name: 'Apex Supplies',
+        category: 'SME · Business supplies',
+        location: 'MIDC Bhosari, Pune',
         default_language: 'English',
         created_at: now,
       },
@@ -339,7 +344,7 @@ function createInitialDatabase(): DatabaseSchema {
         id: SEED_OWNER_ID,
         business_id: SEED_BUSINESS_ID,
         full_name: 'Vikram Mehta (Owner)',
-        email: 'vikram@dailygrindcafe.in',
+        email: 'vikram@apexsupplies.in',
         phone: '+91 98200 11223',
         role: 'OWNER',
         preferred_language: 'English',
@@ -350,7 +355,7 @@ function createInitialDatabase(): DatabaseSchema {
         id: SEED_RAHUL_ID,
         business_id: SEED_BUSINESS_ID,
         full_name: 'Rahul Sharma',
-        email: 'rahul@dailygrindcafe.in',
+        email: 'rahul@apexsupplies.in',
         phone: '+91 98111 22334',
         role: 'EMPLOYEE',
         preferred_language: 'English',
@@ -361,7 +366,7 @@ function createInitialDatabase(): DatabaseSchema {
         id: SEED_PRIYA_ID,
         business_id: SEED_BUSINESS_ID,
         full_name: 'Priya Patil',
-        email: 'priya@dailygrindcafe.in',
+        email: 'priya@apexsupplies.in',
         phone: '+91 98333 44556',
         role: 'EMPLOYEE',
         preferred_language: 'Marathi',
@@ -372,7 +377,7 @@ function createInitialDatabase(): DatabaseSchema {
         id: SEED_AMIT_ID,
         business_id: SEED_BUSINESS_ID,
         full_name: 'Amit Kumar',
-        email: 'amit@dailygrindcafe.in',
+        email: 'amit@apexsupplies.in',
         phone: '+91 98444 55667',
         role: 'EMPLOYEE',
         preferred_language: 'Hindi',
@@ -499,18 +504,76 @@ function createInitialDatabase(): DatabaseSchema {
     processing_jobs: [],
     system_settings: {
       gemini_api_key: process.env.GEMINI_API_KEY || '',
-      gemini_model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+      gemini_model: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
       is_demo_mode: !process.env.GEMINI_API_KEY,
+      storage_type: process.env.SUPABASE_URL ? 'supabase' : 'local',
+      supabase_connected: Boolean(process.env.SUPABASE_URL),
     },
   };
 }
 
 class StorageEngine {
   private db: DatabaseSchema;
+  private supabase: SupabaseClient | null = null;
 
   constructor() {
     this.ensureDataDir();
     this.db = this.loadDatabase();
+    this.initSupabase();
+  }
+
+  private initSupabase() {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+    if (url && key) {
+      try {
+        this.supabase = createClient(url, key, {
+          auth: { persistSession: false },
+          realtime: { transport: ws as any },
+        });
+        this.syncSupabase();
+      } catch (e) {
+        console.warn('Could not initialize Supabase client:', e);
+      }
+    }
+  }
+
+  private async syncSupabase() {
+    if (!this.supabase) return;
+    try {
+      const { data: businesses, error } = await this.supabase.from('businesses').select('*').limit(1);
+      if (!error) {
+        this.db.system_settings.storage_type = 'supabase';
+        this.db.system_settings.supabase_connected = true;
+        console.log('✅ Supabase PostgreSQL live connection verified and active');
+
+        // If remote database is empty, seed it
+        if (!businesses || businesses.length === 0) {
+          console.log('⚡ Initializing remote Supabase tables with seed data...');
+          await this.seedSupabase();
+        }
+      }
+    } catch (e) {
+      console.warn('Supabase sync warning:', e);
+    }
+  }
+
+  private async seedSupabase() {
+    if (!this.supabase) return;
+    try {
+      await this.supabase.from('businesses').upsert(this.db.businesses);
+      await this.supabase.from('users').upsert(this.db.users);
+      await this.supabase.from('training_modules').upsert(this.db.training_modules);
+      await this.supabase.from('training_versions').upsert(this.db.training_versions);
+      await this.supabase.from('training_assignments').upsert(this.db.training_assignments);
+      await this.supabase.from('training_progress').upsert(this.db.training_progress);
+      await this.supabase.from('quiz_attempts').upsert(this.db.quiz_attempts);
+      await this.supabase.from('training_translations').upsert(this.db.training_translations);
+      await this.supabase.from('knowledge_questions').upsert(this.db.knowledge_questions);
+      console.log('✅ Remote Supabase tables successfully populated');
+    } catch (e) {
+      console.warn('Supabase seeding failed:', e);
+    }
   }
 
   private ensureDataDir() {
@@ -529,6 +592,27 @@ class StorageEngine {
           parsed.system_settings.gemini_api_key = process.env.GEMINI_API_KEY;
           parsed.system_settings.is_demo_mode = false;
         }
+        if (process.env.GEMINI_MODEL) {
+          parsed.system_settings.gemini_model = process.env.GEMINI_MODEL;
+        } else if (!parsed.system_settings.gemini_model || parsed.system_settings.gemini_model.includes('2.5')) {
+          parsed.system_settings.gemini_model = 'gemini-3.5-flash';
+        }
+        if (process.env.SUPABASE_URL) {
+          parsed.system_settings.storage_type = 'supabase';
+          parsed.system_settings.supabase_connected = true;
+        }
+        if (parsed.businesses && parsed.businesses[0] && (parsed.businesses[0].name.includes('Daily Grind') || !parsed.businesses[0].name)) {
+          parsed.businesses[0].name = 'Apex Supplies';
+          parsed.businesses[0].category = 'SME · Business supplies';
+          parsed.businesses[0].location = 'MIDC Bhosari, Pune';
+        }
+        if (parsed.users) {
+          for (const u of parsed.users) {
+            if (u.email && u.email.includes('dailygrindcafe.in')) {
+              u.email = u.email.replace('dailygrindcafe.in', 'apexsupplies.in');
+            }
+          }
+        }
         return parsed;
       } catch (e) {
         console.error('Error reading db.json, recreating initial database:', e);
@@ -541,7 +625,14 @@ class StorageEngine {
 
   private saveDatabase(data: DatabaseSchema) {
     try {
-      fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+      const sanitized = {
+        ...data,
+        system_settings: {
+          ...data.system_settings,
+          gemini_api_key: '', // Never persist raw API credentials to disk file
+        },
+      };
+      fs.writeFileSync(DB_FILE, JSON.stringify(sanitized, null, 2), 'utf-8');
     } catch (e) {
       console.error('Error saving db.json:', e);
     }
@@ -858,6 +949,17 @@ class StorageEngine {
 
   // --- Settings ---
   public getSettings() {
+    if (process.env.GEMINI_API_KEY && (!this.db.system_settings.gemini_api_key || this.db.system_settings.gemini_api_key !== process.env.GEMINI_API_KEY)) {
+      this.db.system_settings.gemini_api_key = process.env.GEMINI_API_KEY;
+      this.db.system_settings.is_demo_mode = false;
+    }
+    if (process.env.GEMINI_MODEL) {
+      this.db.system_settings.gemini_model = process.env.GEMINI_MODEL;
+    }
+    if (process.env.SUPABASE_URL) {
+      this.db.system_settings.storage_type = 'supabase';
+      this.db.system_settings.supabase_connected = true;
+    }
     return this.db.system_settings;
   }
 

@@ -1,3 +1,4 @@
+import './env.js';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -722,7 +723,7 @@ app.post('/api/settings', (req, res) => {
 
 app.post('/api/settings/reset', (_req, res) => {
   storage.resetToDemo();
-  res.json({ success: true, message: 'Database reset to pristine demo state with The Daily Grind Café.' });
+  res.json({ success: true, message: 'Database reset to pristine demo state with Apex Supplies (SME · Business supplies).' });
 });
 
 // -------------------------------------------------------------
